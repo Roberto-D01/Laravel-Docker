@@ -18,8 +18,9 @@ cp .env.example .env
 ```
 
 Comando para o Banco:
-
+```sh
 docker-compose exec -it db mysql -u root -p
+```
 
 Atualize as variáveis de ambiente do arquivo .env
 ```dosini
