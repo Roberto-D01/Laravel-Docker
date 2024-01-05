@@ -23,4 +23,3 @@ class CreateEmailsTable extends Migration
         Schema::dropIfExists('emails');
     }
 }
-

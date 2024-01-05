@@ -26,3 +26,4 @@ class CreateAccountsTable extends Migration
         Schema::dropIfExists('accounts');
     }
 }
+

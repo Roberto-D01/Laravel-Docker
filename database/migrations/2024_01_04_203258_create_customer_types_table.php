@@ -20,4 +20,3 @@ class CreateCustomerTypesTable extends Migration
         Schema::dropIfExists('customer_types');
     }
 }
-

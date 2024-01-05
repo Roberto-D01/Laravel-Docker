@@ -20,3 +20,4 @@ class CreateTransactionTypesTable extends Migration
         Schema::dropIfExists('transaction_types');
     }
 }
+
