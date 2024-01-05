@@ -5,6 +5,7 @@ use App\Services\EmailService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class EmailController extends Controller
 {
     protected $emailService;

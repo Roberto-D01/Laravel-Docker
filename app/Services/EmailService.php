@@ -3,10 +3,18 @@
 namespace App\Services;
 
 use App\Models\Email;
-use App\Mail\TransactionMail;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Message\AMQPMessage;
 
 class EmailService
 {
+    protected $rabbitMQProducer;
+
+    public function __construct(RabbitMQProducerService $rabbitMQProducer)
+    {
+        $this->rabbitMQProducer = $rabbitMQProducer;
+    }
+
     public function sendTransactionEmail($to, $subject, $body)
     {
         try {
@@ -18,17 +26,16 @@ class EmailService
                 'sent_at' => now(),
             ]);
 
-            \Mail::to($to)->send(new TransactionMail([
+            // Enviar mensagem para o RabbitMQ
+            $this->rabbitMQProducer->sendEmailMessage([
                 'user_id' => auth()->id(),
-                'amount' => $amount,
-                'type' => $type,
                 'subject' => $subject,
                 'body' => $body,
-            ]));
+            ]);
 
             return true;
         } catch (\Exception $e) {
-        
+            // Log do erro
             \Log::error($e->getMessage());
 
             return false;
