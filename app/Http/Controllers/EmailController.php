@@ -22,15 +22,16 @@ class EmailController extends Controller
             ->join('emails', 'transactions.user_id', '=', 'emails.user_id')
             ->select('transactions.*', 'users.email as user_email', 'emails.subject', 'emails.body')
             ->get();
-
+    
         foreach ($transactions as $transaction) {
             $this->emailService->sendTransactionEmail(
-                ['rj-evil@hotmail.com'],
+                [$transaction->user_email],
+                dd($transaction->user_email);
                 $transaction->subject,
                 $transaction->body
             );
         }
-
+    
         return response()->json(['message' => 'E-mails enviados com sucesso']);
     }
 }

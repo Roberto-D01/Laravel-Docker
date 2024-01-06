@@ -15,13 +15,14 @@ class TransactionService
         $this->emailService = $emailService;
     }
 
-    public function deposit($amount, $account_id)
+    public function deposit($amount,$account_id,$user_id)
     {
         // Criar transação de depósito
         Transaction::create([
             'transaction_type_id' => 1,
             'transaction_value' => $amount,
             'account_id' => $account_id,
+            'user_id' => $user_id,
         ]);
 
         // Atualizar balance_available na tabela 'accounts'
@@ -30,12 +31,12 @@ class TransactionService
         $account->save();
 
         // Enviar email de confirmação
-        $this->emailService->sendTransactionEmail($account->user_id, 'Depósito Realizado', 'Seu depósito foi realizado com sucesso.');
+        $this->emailService->sendTransactionEmail($user_id, 'Depósito Realizado', 'Seu depósito foi realizado com sucesso.');
 
         return true; // Depósito realizado com sucesso
     }
 
-    public function withdraw($amount, $account_id)
+    public function withdraw($amount, $account_id,$user_id)
     {
         // Verificar se há saldo suficiente
         $account = Account::find($account_id);
@@ -48,6 +49,7 @@ class TransactionService
             'transaction_type_id' => 2,
             'transaction_value' => $amount,
             'account_id' => $account_id,
+            'user_id' => $user_id,
         ]);
 
         // Atualizar balance_available na tabela 'accounts'
@@ -55,7 +57,7 @@ class TransactionService
         $account->save();
 
         // Enviar email de confirmação
-        $this->emailService->sendTransactionEmail($account->user_id, 'Saque Realizado', 'Seu saque foi realizado com sucesso.');
+        $this->emailService->sendTransactionEmail($user_id, 'Saque Realizado', 'Seu saque foi realizado com sucesso.');
 
         return true; // Saque realizado com sucesso
     }

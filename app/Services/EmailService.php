@@ -20,25 +20,25 @@ class EmailService
         try {
             // Lógica para enviar email
             Email::create([
-                'user_id' => auth()->id(),
+                'user_id' => $to,
                 'subject' => $subject,
                 'body' => $body,
                 'sent_at' => now(),
             ]);
-
+    
             // Enviar mensagem para o RabbitMQ
             $this->rabbitMQProducer->sendEmailMessage([
-                'user_id' => auth()->id(),
+                'user_id' => $to,
                 'subject' => $subject,
                 'body' => $body,
             ]);
-
+    
             return true;
         } catch (\Exception $e) {
             // Log do erro
             \Log::error($e->getMessage());
-
+    
             return false;
         }
-    }
+    }    
 }
