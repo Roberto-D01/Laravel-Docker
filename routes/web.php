@@ -18,4 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/bank-app', function () {
+    return view('bank-app');
+});
+
 Route::get('/test-rabbitmq', [RabbitMQCoANTntroller::class, 'testConnection'])->name('testConnection');

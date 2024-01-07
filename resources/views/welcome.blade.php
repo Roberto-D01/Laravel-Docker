@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="src/app.js" defer></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
