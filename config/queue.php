@@ -73,7 +73,7 @@ return [
 
         'rabbitmq' => [
             'driver' => 'rabbitmq',
-            'host' => env('RABBITMQ_HOST', 'localhost'),
+            'host' => env('RABBITMQ_HOST', 'rabbitmq'),
             'port' => env('RABBITMQ_PORT', 5672),
             'vhost' => env('RABBITMQ_VHOST', '/'),
             'login' => env('RABBITMQ_LOGIN', 'guest'),

@@ -28,5 +28,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/send-transaction-email', [EmailController::class, 'sendTransactionEmail']);
 
-Route::get('/test-rabbitmq', [RabbitMQCoANTntroller::class, 'testConnection'])->name('testConnection');
-
+Route::get('/test-rabbitmq-connection', [RabbitMQController::class, 'testConnection']);
